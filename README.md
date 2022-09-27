@@ -29,3 +29,9 @@ feh
 repositorios:
 https://github.com/dasShounak/dotfiles/tree/main/themes
 
+extras:
+ neofetch
+ htop
+ cava 
+ gotop 
+ bumble-estatus 
