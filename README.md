@@ -49,3 +49,15 @@ graficos :
 mesa vulkan-intel vulkan-icd-loader
 mesa utils 
 xorg xorg-server 
+
+
+Verificar paquetes huérfanos y descartados
+pacman -Qtd
+
+Eliminar paquetes no utilizados (huérfanos)
+pacman -Rns $(pacman -Qtdq)
+pacman -Rns $(pacman -Qttdq)
+
+Enlaces simbólicos rotos
+find -xtype l -print
+
