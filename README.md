@@ -61,3 +61,9 @@ pacman -Rns $(pacman -Qttdq)
 Enlaces simbólicos rotos
 find -xtype l -print
 
+
+
+repositorios para powerline bar: 
+https://github.com/tobi-wan-kenobi/bumblebee-status
+
+git clone https://github.com/tobi-wan-kenobi/bumblebee-status 
