@@ -42,3 +42,10 @@ extras:
  
  1)mplayer 
  2)dragon 
+
+
+graficos : 
+
+mesa vulkan-intel vulkan-icd-loader
+mesa utils 
+xorg xorg-server 
