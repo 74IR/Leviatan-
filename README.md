@@ -67,3 +67,14 @@ repositorios para powerline bar:
 https://github.com/tobi-wan-kenobi/bumblebee-status
 
 git clone https://github.com/tobi-wan-kenobi/bumblebee-status 
+
+
+
+temas para powerline bar :
+ -t iceberg-rainbow
+ -t iceberg-powerline
+ -t onedark-powerline
+ -t dracula-powerline
+ -t nord-powerline
+ nothing or -t default
+ 
