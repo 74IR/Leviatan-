@@ -35,3 +35,10 @@ extras:
  cava 
  gotop 
  bumble-estatus 
+ 
+ 
+ 
+ Reproductor de musica y video 
+ 
+ 1)mplayer 
+ 2)dragon 
