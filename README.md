@@ -78,3 +78,6 @@ temas para powerline bar :
  -t nord-powerline
  nothing or -t default
  
+
+requerimientos para nic: 
+sudo pacman -S python-netifaces
