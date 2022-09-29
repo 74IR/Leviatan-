@@ -81,3 +81,24 @@ temas para powerline bar :
 
 requerimientos para nic: 
 sudo pacman -S python-netifaces
+
+
+
+pamixer:
+
+sudo pacman -S pamixer
+
+
+bar {
+    font pango:Inconsolata 10
+    position top
+    tray_output none
+    status_command ~/.config/bumblebee-status/bumblebee-status -m \
+          ping pamixer disk cpu memory datetime  \
+        -p root.path=/ time.format="%H:%M %S" date.format="%a, %b %d %Y" \
+        -t dracula-powerline
+}
+ 
+ publicip
+ traffic
+ weather
