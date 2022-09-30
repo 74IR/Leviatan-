@@ -1,0 +1,94 @@
+https://wiki.archlinux.org/title/System_maintenance_(Espa%C3%B1ol)
+
+Para eliminar un paquete, el cual es requerido por otro paquete, sin quitar el paquete dependiente:
+# pacman -Rdd nombre_del_paquete
+
+Eliminar paquetes no utilizados (huérfanos)
+Para eliminar de forma recursiva los paquetes huérfanos y sus archivos de configuración:
+# pacman -Rns $(pacman -Qtdq)
+
+
+
+ARCHIVO DE REGISTRO DAÑADOS: 
+journalctl -p 3 -xb
+sudo pacman -S intel-ucode 
+
+
+ERRORES DEL SISTEMA:
+systemctl --failed
+
+
+
+
+
+https://wiki.archlinux.org/title/mirrors#Sorting_mirrors
+Clasificación de una lista de réplicas existente
+El paquete pacman-contrib proporciona un script Bash /usr/bin/rankmirrors, que se puede usar para clasificar los espejos según su conexión y velocidades de apertura para aprovechar el uso del espejo local más rápido.
+Copia de seguridad de lo existente /etc/pacman.d/mirrorlist:
+# cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+Para prepararse mirrorlist.backuppara la clasificación con rankmirrors , se pueden llevar a cabo las siguientes acciones:
+
+Edite mirrorlist.backupy elimine los comentarios de los servidores a probar
+Si los servidores en el archivo están agrupados por país, uno puede extraer todos los servidores de un país específico usando:
+$ awk '/^## Nombre del país $/{f=1; siguiente}f==0{siguiente}/^$/{salir}{imprimir substr($0, 1);}' /etc/pacman.d/mirrorlist.backup
+Para descomentar cada espejo, ejecute la siguiente sedlínea:
+# sed -i 's/^#Servidor/Servidor/' /etc/pacman.d/mirrorlist.backup
+Finalmente, clasifique los espejos, aquí con el operando -n 6para generar solo los 6 espejos más rápidos:
+# rankmirrors -n 6 /etc/pacman.d/mirrorlist.backup > /etc/pacman.d/mirrorlist
+
+ sudo pacman -S pacman-contrib
+ 
+ sudo sed -i 's/^#Server/Server/' /etc/pacman.d/mirrorlist
+
+ rankmirrors -n 6 /etc/pacman.d/mirrorlist
+
+
+
+
+
+
+Limpiar la memoria caché de los paquetes
+Pacman almacena los paquetes descargados en /var/cache/pacman/pkg/ y no elimina las versiones antiguas o desinstaladas automáticamente. Esto tiene algunas ventajas:
+
+Permite realizar downgrade de un paquete sin necesidad de recuperar la versión anterior por otros medios, como de Arch Linux Archive.
+Un paquete que se ha desinstalado se puede reinstalar fácilmente directamente desde la carpeta caché, sin necesidad de una nueva descarga desde el repositorio.
+Sin embargo, es necesario limpiar deliberadamente la caché periódicamente para evitar que la carpeta crezca indefinidamente en tamaño.
+
+El script paccache, proporcionado dentro del paquete pacman-contrib, elimina todas las versiones en caché de los paquetes instalados y desinstalados, excepto los 3 más recientes, por defecto:
+
+ # paccache -r
+Active e inicie paccache.timer para descartar paquetes no utilizados semanalmente.
+
+Sugerencia: Puede crear #Hooks para ejecutar esto automáticamente después de cada transacción de pacman, vea ejemplos.
+También puede definir cuántas versiones recientes desea conservar. Para conservar solo una versión anterior, utilice:
+
+# paccache -rk1
+Añada la opción u para limitar la acción de paccache a los paquetes desinstalados. Por ejemplo, para eliminar todas las versiones en caché de paquetes desinstalados, utilice lo siguiente:
+
+# paccache -ruk0
+Véase paccache -h para más opciones.
+
+Pacman también tiene algunas opciones integradas para limpiar el caché y los archivos de base de datos sobrantes de los repositorios que ya no figuran en el archivo de configuración de /etc/pacman.conf. Sin embargo, pacman no ofrece la posibilidad de mantener una serie de versiones anteriores y, por lo tanto, es más agresivo que las opciones predeterminadas de paccache.
+
+Para eliminar todos los paquetes en caché que no están instalados actualmente, y la base de datos de sincronización no utilizada, ejecute:
+
+ # pacman -Sc
+Advertencia: se deben evitar eliminar de la caché todas las versiones anteriores de los paquetes instalados y todos los paquetes desinstalados, a menos que se necesite desesperadamente liberar espacio en el disco. Esto permitirá degradar o reinstalar paquetes sin descargarlos nuevamente.
+pkgcachecleanAUR y pacleanerAUR son dos alternativas más para limpiar la caché.
+
+
+Descargar un paquete sin instalarlo:
+
+# pacman -Sw nombre_del_paquete
+Instalar un paquete «local» que no proviene de un repositorio remoto (por ejemplo, el paquete proviene de AUR (Español)):
+
+# pacman -U /ruta/al/paquete/nombre_del_paquete-versión.pkg.tar.xz
+Para mantener una copia del paquete local en la caché de pacman, utilice:
+
+# pacman -U file://ruta/al/paquete/nombre_del_paquete-versión.pkg.tar.xz
+Instalar un paquete 'remoto' (no de un repositorio indicado en los archivos de configuración de pacman):
+
+# pacman -U http://www.ejemplo.com/repo/ejemplo.pkg.tar.xz
+Para inhibir las acciones derivadas de -S, -U y -R, puede utilizarse -p.
+
+Pacman siempre enumerará los paquetes que se van a instalar o eliminar y pedirá permiso antes de realizar la acción.
