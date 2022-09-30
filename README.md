@@ -65,8 +65,11 @@ find -xtype l -print
 
 repositorios para powerline bar: 
 https://github.com/tobi-wan-kenobi/bumblebee-status
-
+Clonar en .config
 git clone https://github.com/tobi-wan-kenobi/bumblebee-status 
+
+DOCUMENTACION: 
+https://bumblebee-status.readthedocs.io/en/latest/
 
 
 
