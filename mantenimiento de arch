@@ -1,3 +1,11 @@
+ACTIVAR EL INTERNET: 
+
+sudo systemctl start NetworkManager.service
+sudo systemctl enable NetworkManager
+
+
+
+MANTENIMIENTO : 
 https://wiki.archlinux.org/title/System_maintenance_(Espa%C3%B1ol)
 
 Para eliminar un paquete, el cual es requerido por otro paquete, sin quitar el paquete dependiente:
