@@ -15,7 +15,8 @@ Eliminar paquetes no utilizados (huérfanos)
 Para eliminar de forma recursiva los paquetes huérfanos y sus archivos de configuración:
 # pacman -Rns $(pacman -Qtdq)
 
-
+eliminar.permanentemente una aplicacion con sus dependencias y historia..
+ # pacman -Rsn (aplicacion)
 
 ARCHIVO DE REGISTRO DAÑADOS: 
 journalctl -p 3 -xb
@@ -24,9 +25,6 @@ sudo pacman -S intel-ucode
 
 ERRORES DEL SISTEMA:
 systemctl --failed
-
-
-
 
 
 https://wiki.archlinux.org/title/mirrors#Sorting_mirrors
