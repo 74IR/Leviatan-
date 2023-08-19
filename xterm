@@ -34,6 +34,7 @@ urxvt.pointerBlank:           true
 urxvt.resource:               value
 urxvt.iso14755:               false
 urxvt.iso14755_52:            false
+urxvt.geometry:               30x40
 
 ! xterm
 xterm*VT100*geometry:         80x24
